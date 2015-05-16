@@ -15,6 +15,8 @@ import com.google.api.services.calendar.model.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -94,7 +96,7 @@ public class CalendarQuickstart {
                 .build();
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
         // Build a new authorized API client service.
         // Note: Do not confuse this class with the
         //   com.google.api.services.calendar.model.Calendar class.
@@ -103,7 +105,7 @@ public class CalendarQuickstart {
 
         // List the next 10 events from the primary calendar.
         DateTime now = new DateTime(System.currentTimeMillis());
-        Events events = service.events().list("primary")
+        Events events = service.events().list("5li007o8knekdfva66em0bu5h4@group.calendar.google.com")
             .setMaxResults(10)
             .setTimeMin(now)
             .setOrderBy("startTime")
@@ -128,20 +130,20 @@ public class CalendarQuickstart {
         event.setSummary("Appointment");
         event.setLocation("Somewhere");
 
-        ArrayList<EventAttendee> attendees = new ArrayList<EventAttendee>();
-        attendees.add(new EventAttendee().setEmail("nakamura.masakatsu@gmail.com"));
+//        ArrayList<EventAttendee> attendees = new ArrayList<EventAttendee>();
+//        attendees.add(new EventAttendee().setEmail("5li007o8knekdfva66em0bu5h4@group.calendar.google.com"));
         // ...
-        event.setAttendees(attendees);
+//       event.setAttendees(attendees);
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+        fmt.setTimeZone(TimeZone.getTimeZone("JST"));
 
-        Date startDate = new Date();
-        Date endDate = new Date(startDate.getTime() + 3600000);
-        DateTime start = new DateTime(startDate, TimeZone.getTimeZone("UTC"));
+        DateTime start = new DateTime(fmt.parse("2015-5-20 12:00:00"), TimeZone.getTimeZone("UTC"));
         event.setStart(new EventDateTime().setDateTime(start));
-        DateTime end = new DateTime(endDate, TimeZone.getTimeZone("UTC"));
+        DateTime end = new DateTime(fmt.parse("2015-5-20 13:00:00"), TimeZone.getTimeZone("UTC"));
         event.setEnd(new EventDateTime().setDateTime(end));
 
         // Insert the new event
-        Event createdEvent = service.events().insert("primary", event).execute();
+        Event createdEvent = service.events().insert("5li007o8knekdfva66em0bu5h4@group.calendar.google.com", event).execute();
 
         System.out.println(createdEvent.getId());
         
