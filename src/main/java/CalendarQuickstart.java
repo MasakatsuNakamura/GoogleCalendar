@@ -127,8 +127,8 @@ public class CalendarQuickstart {
 
      // Create and initialize a new event
         Event event = new Event();
-        event.setSummary("Appointment");
-        event.setLocation("Somewhere");
+        event.setSummary("ねんねこ大会");
+//        event.setLocation("Somewhere");
 
 //        ArrayList<EventAttendee> attendees = new ArrayList<EventAttendee>();
 //        attendees.add(new EventAttendee().setEmail("5li007o8knekdfva66em0bu5h4@group.calendar.google.com"));
@@ -137,9 +137,9 @@ public class CalendarQuickstart {
         SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
         fmt.setTimeZone(TimeZone.getTimeZone("JST"));
 
-        DateTime start = new DateTime(fmt.parse("2015-5-20 12:00:00"), TimeZone.getTimeZone("UTC"));
+        DateTime start = new DateTime(fmt.parse("2015-05-20 12:00:00"), TimeZone.getTimeZone("UTC"));
         event.setStart(new EventDateTime().setDateTime(start));
-        DateTime end = new DateTime(fmt.parse("2015-5-20 13:00:00"), TimeZone.getTimeZone("UTC"));
+        DateTime end = new DateTime(fmt.parse("2015-05-20 13:00:00"), TimeZone.getTimeZone("UTC"));
         event.setEnd(new EventDateTime().setDateTime(end));
 
         // Insert the new event
